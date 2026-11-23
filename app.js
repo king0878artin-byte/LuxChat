@@ -37,4 +37,5 @@ $("authSettings").onclick=settings;$("openConfig").onclick=settings;$("newChat")
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");filter=b.dataset.filter;renderChats()});
 $("attachButton").onclick=()=>$("fileInput").click();
 $("fileInput").onchange=async e=>{const f=e.target.files[0];if(!f||!active)return;if(f.size>25*1024*1024){toast("Maximum file size is 25 MB.");return}const path=active.id+"/"+crypto.randomUUID()+"-"+f.name.replace(/[^\w.\-]/g,"_");const up=await sb.storage.from("chat-files").upload(path,f);if(up.error){toast(up.error.message);return}const signed=await sb.storage.from("chat-files").createSignedUrl(path,604800);if(signed.error){toast(signed.error.message);return}const r=await sb.from("messages").insert({conversation_id:active.id,sender_id:user.id,body:"",attachment_url:signed.data.signedUrl,attachment_name:f.name});if(r.error)toast(r.error.message);e.target.value=""};
+if ("serviceWorker" in navigator) window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
 boot();
