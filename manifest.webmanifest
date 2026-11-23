@@ -1,0 +1,17 @@
+{
+  "name": "LuxChat",
+  "short_name": "LuxChat",
+  "description": "Private conversations, groups and channels.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#edf3f0",
+  "theme_color": "#168b75",
+  "icons": [
+    {
+      "src": "./assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
